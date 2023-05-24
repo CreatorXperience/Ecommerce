@@ -78,12 +78,22 @@ export type forCurrentProductState = {
       "product-amount": number,
       "product-reviews": number,
       "product-description": string
+      "quan": number
   }
 }
 
 
 export type productCardType = {
-  AddToCart: (item:{})=> void
+  AddToCart: (item:{
+    "category":  string;
+    "link": number,
+    "product-image-link": string,
+    "product-name": string,
+    "product-amount": number,
+    "product-reviews": number,
+    "product-description": string,
+    "quan": number
+})=> void
 }
 
 // export type forProductPageProps = {
@@ -91,6 +101,6 @@ export type productCardType = {
 // }
 
 export type forCartItem = {
-  item: {}[]
+  item: {}[] 
 }
 

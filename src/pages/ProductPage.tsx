@@ -10,6 +10,7 @@ import "../../src/style.css"
 
 const ProductPage = ({AddToCart}:productCardType)=> {
  let {id,term} = useParams()
+ const [quantity,setQuantity]= useState(0)
 const [ProductState, setProductState] = useState<forCurrentProductState>({data: {
         "category": '',
         "link": 0,
@@ -18,22 +19,22 @@ const [ProductState, setProductState] = useState<forCurrentProductState>({data: 
         "product-amount": 0,
         "product-reviews": 0,
         "product-description": "",
-        
+        'quan': quantity
 }})
 
 const [isAdded, setIsAdded] = useState(false)
 
+
+
 const AddProductToCart = () => {
     if(isAdded === false){
         setIsAdded(true)
-        AddToCart({...memo, quan: quantity})
+        AddToCart({...ProductState.data})
     }
 }
-   let memo =  useMemo(()=> {
-return ProductState
-    },[ProductState])
+  
 
-const [quantity,setQuantity]= useState(0)
+
 
 
 
@@ -95,7 +96,7 @@ useEffect(()=> {
                 <div className='px-4 text-[15px] w-[100%] font-light mb-10'> {ProductState.data['product-description']} </div>
                 <div className='flex fixed  w-[100%] bottom-0'> 
                 <div className='w-1/5 mx-2 py-4 flex justify-center my-4 px-2 rounded-lg bg-gray-300'>{Svg.save()}</div>
-             <div className='w-4/5 mx-2 py-4 text-center my-4 px-2 rounded-lg bg-gray-900 text-white text-xl' onClick={()=> AddProductToCart()}> {isAdded? "Added to Cart": "Added to Cart"}  </div>
+             <div className='w-4/5 mx-2 py-4 text-center my-4 px-2 rounded-lg bg-gray-900 text-white text-xl' onClick={()=> AddProductToCart()}> Add to Cart </div>
              </div>
              </div>
            
@@ -104,4 +105,4 @@ useEffect(()=> {
     )
 }
 
-export default ProductPage
+export default React.memo(ProductPage)
