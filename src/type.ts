@@ -78,29 +78,26 @@ export type forCurrentProductState = {
       "product-amount": number,
       "product-reviews": number,
       "product-description": string
-      "quan": number
   }
 }
 
 
 export type productCardType = {
-  AddToCart: (item:{
-    "category":  string;
-    "link": number,
-    "product-image-link": string,
-    "product-name": string,
-    "product-amount": number,
-    "product-reviews": number,
-    "product-description": string,
-    "quan": number
-})=> void
+  AddToCart: (item:forCurrentProductState)=> void
 }
 
 // export type forProductPageProps = {
 //   addToCart: (item:{})=> void
 // }
 
+export type CartContextType = {
+   cart: {}[],
+   handleRemoveCart: (index:number)=> void
+}
 export type forCartItem = {
-  item: {}[] 
+  item: {
+    "link"?: string
+    
+  }[]
 }
 
