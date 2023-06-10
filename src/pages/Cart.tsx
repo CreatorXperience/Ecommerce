@@ -20,7 +20,7 @@ let SlicedCart = cart.slice(1, cart.length)
     
 return (
     <div> 
-        <div className='w-[100%] mb-32  '> 
+        <div className='w-[100%] mb-64  '> 
        
         <div className='flex w-[50%] mb-2 mt-2 justify-between'> 
     <Link to="/home">     <div className='mx-4'> 
@@ -34,15 +34,15 @@ return (
         <div>{newCart}</div>
         </div>
 
-<div className='bg-gray-50 w-[100%] h-[100%]'>
+<div className='bg-white mt-44  fixed bottom-0 w-[100%] h-[30%]'> 
         <DiscountCard />
 
-<div className='flex justify-between fixed bottom-12 w-[100%] mt-4 px-6 '>
-    <div className='text-xl  font-medium text-gray-600'>Total </div>
-    <div className='font-bold text-xl mb-4'> $95.00 </div>
+<div className='flex justify-between   w-[100%] mt-4 px-6 '>
+    <div className='text-xl font-medium  text-gray-600'> Total </div>
+    <div className='font-bold text-xl mb-4'> $00.00 </div>
 </div>
 <div className='w-[100%] flex justify-center'> 
-<button className='bg-gray-900 px-4 py-4 fixed w-[90%] rounded-lg mx-2 bottom-0 text-gray-50'> CHECKOUT </button>
+<button className='bg-gray-900 mb-2 px-4 py-4  w-[90%] rounded-lg mx-2 bottom-0 text-gray-50'> CHECKOUT </button>
 </div> 
 </div>
     </div>
