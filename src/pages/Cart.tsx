@@ -1,33 +1,30 @@
-import React, { useEffect,useState} from 'react'
+import React, {useContext} from 'react'
+import { CartContextType} from '../type'
+import { Context } from '../App'
 import ItemCard from '../components/ItemCard'
-import { forCartItem} from '../type'
 
 
-const Cart = ({item}:forCartItem)=>{
-    const [cartItem, setCartItem]= useState(item)
-    
-    useEffect(()=> {
-        let item =   localStorage.getItem('cart')
-        if(item !== undefined){
-            setCartItem(JSON.parse(item as string))
-        }
-      },[])
-    
-
-    useEffect(()=> {
-localStorage.setItem('cart',JSON.stringify(cartItem))
-    })
-
+const Cart = ()=>{
+    const {cart} = useContext(Context) as CartContextType
+let SlicedCart
+SlicedCart = cart.slice(1, cart.length)
    
 
+   let newCart =  SlicedCart.map((item,index)=> {
+    let {data} = item
+        return <ItemCard key={data['product-reviews']} Index = {index} content={item}/>
+    })
     
-
-   let eachItem = cartItem.map((item)=> {
-      return   <ItemCard />
-   })
 return (
     <div> 
-   {eachItem}
+        <div className='w-[100%] '> 
+        <div> 
+      
+        </div>
+
+        <div>{newCart}</div>
+        </div> 
+  
     </div>
    
 )

@@ -38,6 +38,7 @@ export type forHomeState = {
        "product-name": string,
        "product-amount": number,
        "product-reviews": number,
+       "quantity": number,
        "product-description": string
    }[] 
 }
@@ -51,21 +52,14 @@ export type forHomeErrorProps = {
       "product-name": string,
       "product-amount": number,
       "product-reviews": number,
+      "quantity": number,
       "product-description": string
   } 
   }
 
   
 export type forProductState = {
-  data:[ {
-      "category":  string;
-      "link": number,
-      "product-image-link": string,
-      "product-name": string,
-      "product-amount": number,
-      "product-reviews": number,
-      "product-description": string
-  }]
+  data: forCurrentProductState[]
 }
 
 
@@ -77,20 +71,39 @@ export type forCurrentProductState = {
       "product-name": string,
       "product-amount": number,
       "product-reviews": number,
+      "quantity": number,
       "product-description": string
   }
 }
 
 
 export type productCardType = {
-  AddToCart: (item:{})=> void
+  AddToCart: (item:forCurrentProductState,quantity: number)=> void
 }
 
 // export type forProductPageProps = {
 //   addToCart: (item:{})=> void
 // }
 
-export type forCartItem = {
-  item: {}[]
+export type CartContextType = {
+   cart: forCurrentProductState[],
+   handleRemoveCart: (exp:number)=> void,
+   handleAddToCart: (item: forCurrentProductState,quantity:number)=> void,
+   fetchState: {
+    "category":  string;
+       "link": number,
+       "product-image-link": string,
+       "product-name": string,
+       "product-amount": number,
+       "product-reviews": number,
+       "quantity": number,
+       "product-description": string
+   }[] | null,
+   QTY: number,
+   setQTY: React.Dispatch<React.SetStateAction<number>>
 }
 
+//REFACTOR
+export type forHomePageProps = {
+  handleFetch: (term: string)=> void
+}

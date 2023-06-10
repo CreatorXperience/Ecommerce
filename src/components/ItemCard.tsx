@@ -1,31 +1,49 @@
-import { useState } from "react";
+import { useState,useContext} from "react";
 import Svg from "./icons/Svg";
 import SumPrice from "./SumPrice";
+import {CartContextType, forCurrentProductState } from "../type";
+import { Context } from "../App";
+
+const ItemCard = (props:{key: number, Index: number, content: forCurrentProductState}) => {
+  let {handleRemoveCart} = useContext(Context) as CartContextType
+const  [quant, setQuantity] = useState(props.content.data.quantity)
+const [amount,setAmount] = useState(props.content.data["product-amount"])
+
+const handleRemoveItem = ()=> {
+handleRemoveCart(props.Index)
+}
+
+const handleMultiplyAmount = (amount: number)=> {
+  let  determinePriceBasedOnQTY = amount * props.content.data["product-amount"];
+  setAmount(determinePriceBasedOnQTY)
+}
 
 
-
-const ItemCard = () => {
-const [quant,getQuan] = useState(0)
   return (
-    <div className=" w-[96%] flex mx-2 mt-2 cursor-pointer shadow-md py-1 rounded-sm">
+    <div className="w-[100%] flex "> 
+   <div className=" w-[100%] flex mx-2 mt-2 cursor-pointer shadow-md py-1 rounded-sm">
+     <div className="w-[100%] flex">  
    <div>
-    <img src="https://i.pinimg.com/564x/8f/08/74/8f0874b2ad7b5d5fa46633cfed69017f.jpg" alt="img" className="w-36 rounded-2xl"/>
+    <img src={props.content.data["product-image-link"]} alt="img" className="w-36 rounded-2xl"/>
      </div> 
 <div className="w-[100%]"> 
      <div className="w-[100%] flex justify-between"> 
-      <div className="text-gray-400 font-normal text-md mx-4">Minimal Stand</div> 
-      <div>{Svg.close()}</div>
+      <div className="text-gray-400 font-normal text-md mx-4">{props.content.data["product-name"]}</div> 
+     
+      <div onClick={handleRemoveItem}>{Svg.close()}</div>
      </div>
 
-<div className="text-gray-900 font-semibold text-md mx-4"> $ <span>25.00</span></div>
+<div className="text-gray-900 font-semibold text-md mx-4"> $ <span>{amount}</span></div>
 
 
 <div className="w-[100%] flex justify-between"> 
-<div className="mt-4"> <SumPrice quantity={0} getQuantity={getQuan} />  </div>
+<div className="mt-4"> <SumPrice quantity={quant} getQuantity={handleMultiplyAmount} />  </div>
 
 <div className="mx-4 mt-8">{Svg.darkShoppingBag()} </div>
 </div>
 </div>
+</div>
+    </div> 
     </div>
   );
 };
